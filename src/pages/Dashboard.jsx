@@ -8,11 +8,17 @@ const Dashboard = () => {
   useEffect(() => {
     socket.connect();
 
-    socket.on("notification", (data) =>{
+    socket.on("notification", (data) => {
       console.log(data)
     })
 
-    return () =>{
+    socket.on("message", (data) => {
+      console.log(data)
+    })
+
+    return () => {
+      socket.off("motification");
+      socket.off("messages");
       socket.disconnect();
     }
 
